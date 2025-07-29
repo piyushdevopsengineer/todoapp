@@ -1,6 +1,7 @@
 terraform {
   required_providers {
-    azurerm = {
+    azurerm = { 
+      source = "hashicorp/azurerm"
       version = "4.37.0"
     }
   }
@@ -13,5 +14,9 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg1" {
   name     = "piyush-rg1"
+  location = "westus"
+}
+resource "azurerm_resource_group" "rg3" {
+  name     = "piyush-rg3"
   location = "westus"
 }
