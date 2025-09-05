@@ -1,0 +1,34 @@
+
+trigger: none
+
+pool: myagent
+
+steps:
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
+- task: TerraformTask@5
+  displayName: Terraform_Init
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'mysvc1'
+    backendAzureRmStorageAccountName: 'piyushstg0925'
+    backendAzureRmContainerName: 'piyushcont0925'
+    backendAzureRmKey: 'pipeline.tfstate'
+
+- task: TerraformTask@5
+  displayName: Terraform_Validate
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+
+
+- task: TerraformTask@5
+  displayName: Terraform_Plan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'mysvc1'
+
