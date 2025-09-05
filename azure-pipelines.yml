@@ -1,5 +1,6 @@
 
-trigger: none
+trigger: 
+- main
 
 pool: myagent
 
@@ -30,5 +31,13 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
+    environmentServiceNameAzureRM: 'mysvc1'
+
+- task: TerraformTask@5
+  displayName: Terrafrom_Apply
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    commandOptions: '--auto-approve'
     environmentServiceNameAzureRM: 'mysvc1'
 
